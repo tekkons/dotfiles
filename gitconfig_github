@@ -1,0 +1,11 @@
+[user]
+  name = tekkons
+  email = 18157396+tekkons@users.noreply.github.com
+[core]
+  editor = vim
+  autocrlf = input
+  safecrlf = warn
+[init]
+  defaultBranch = main
+[pull]
+  rebase = true
