@@ -1,0 +1,31 @@
+{
+    "window.titleBarStyle": "native",
+    "window.customTitleBarVisibility": "never",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "GitHub Dark",
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.tabSize": 2,
+    "editor.smoothScrolling": true,
+    "editor.fontLigatures": true,
+    "editor.cursorBlinking": "phase",
+    "editor.mouseWheelZoom": true,
+    "explorer.confirmDelete": false,
+    "redhat.telemetry.enabled": false,
+    "telemetry.telemetryLevel": "off",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "terminal.integrated.cursorBlinking": true,
+    "[yaml]": {
+        "diffEditor.ignoreTrimWhitespace": false
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "files.enableTrash": false,
+    "files.associations": {
+        "*.tftpl": "terraform-vars"
+    }
+}
