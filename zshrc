@@ -2,7 +2,8 @@
 autoload -Uz compinit && compinit -i
 zstyle ':completion:*' menu select
 
-bindkey -e
+# Bindings
+bindkey -e    # Emacs key binding
 
 if [[ "$OSTYPE" =~ "linux" ]]; then
   # Ctrl + left/right arrow keys
@@ -32,17 +33,28 @@ setopt HIST_NO_STORE          # Don't store history commands
 if [[ "$OSTYPE" =~ "darwin" ]]; then
   # ls
   alias ls='ls --color=auto'
-  alias ll='ls -Flh'
-  alias la='ls -Flha'
+  alias ll='ls -lh'
+  alias la='ls -lha'
 elif [[ "$OSTYPE" =~ "linux" ]]; then
   # ls
   alias ls='ls --color=auto'
-  alias ll='ls --group-directories-first --human-readable -Flv'
-  alias la='ls --group-directories-first --human-readable -Flv --all'
+  alias ll='ls --group-directories-first --human-readable -lv'
+  alias la='ls --group-directories-first --human-readable -lv --all'
 fi
 
 alias vi='vim'
 alias cht='cht.sh'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+(( $+commands[kubectl] )) && alias k='kubectl'
+(( $+commands[kubectx] )) && alias kx='kubectx'
+(( $+commands[kubens] )) && alias kns='kubens'
+
+# ENVS
+[[ "$OSTYPE" =~ "linux" ]] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # LANGUAGE must be set by en_US
 export LANGUAGE="en_US.UTF-8"
