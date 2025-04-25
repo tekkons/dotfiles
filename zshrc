@@ -2,21 +2,24 @@
 autoload -Uz compinit && compinit -i
 zstyle ':completion:*' menu select
 
-# Bindings
-bindkey -e    # Emacs key binding
+# Use emacs key bindings
+bindkey -e
 
-if [[ "$OSTYPE" =~ "linux" ]]; then
-  # Ctrl + left/right arrow keys
-  bindkey "^[[1;5C" forward-word
-  bindkey "^[[1;5D" backward-word
-fi
+# [Ctrl-RightArrow] - move forward one word
+bindkey "^[[1;5C" forward-word
+# [Ctrl-LeftArrow] - move backward one word
+bindkey "^[[1;5D" backward-word
+# [Delete] - delete forward
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char
 
+WORDCHARS=''
 PROMPT=' %(?.%F{10}❯.%F{9}❯)%f %F{11}%~%f '
 
 # History
-HISTFILE=$HOME/.zsh_history   # History file
-HISTSIZE=10000                # History size in memory
-SAVEHIST=100000               # The number of histsize
+HISTFILE="$HOME/.zsh_history" # History file
+HISTSIZE=20000                # History size in memory
+SAVEHIST=10000                # The number of histsize
 
 # Options
 setopt EXTENDED_HISTORY       # Write the history file in the ":start:elapsed;command" format
@@ -30,31 +33,30 @@ setopt APPEND_HISTORY         # append to history file
 setopt HIST_NO_STORE          # Don't store history commands
 
 # Aliases
-if [[ "$OSTYPE" =~ "darwin" ]]; then
-  # ls
-  alias ls='ls --color=auto'
-  alias ll='ls -lh'
-  alias la='ls -lha'
-elif [[ "$OSTYPE" =~ "linux" ]]; then
-  # ls
-  alias ls='ls --color=auto'
-  alias ll='ls --group-directories-first --human-readable -lv'
-  alias la='ls --group-directories-first --human-readable -lv --all'
-fi
-
 alias vi='vim'
-alias cht='cht.sh'
+alias md='mkdir -p'
+alias rd='rmdir'
 
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+# List directory contents
+alias ls='ls --color=auto'
+alias l='ls -lhva'
+alias ll='ls -lhv'
+alias la='ls -lhvA'
 
 (( $+commands[kubectl] )) && alias k='kubectl'
 (( $+commands[kubectx] )) && alias kx='kubectx'
 (( $+commands[kubens] )) && alias kns='kubens'
 
-# ENVS
-[[ "$OSTYPE" =~ "linux" ]] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# ssh-agent
+[[ "$OSTYPE" =~ "linux" ]] && (( $+commands[ssh-agent] )) && {
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+}
 
 # LANGUAGE must be set by en_US
 export LANGUAGE="en_US.UTF-8"
@@ -75,10 +77,16 @@ export LC_CTYPE="$LANGUAGE"
   export KUBECONFIG
 }
 
-# Autocompletion scripts
-source <(kubectl completion zsh)
-source <(helm completion zsh)
+# Automatically load completion functions
+(( $+commands[kubectl] )) && source <(kubectl completion zsh)
+(( $+commands[helm] )) && source <(helm completion zsh)
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
+(( $+commands[terraform] )) && {
+  if [[ "$OSTYPE" =~ "linux" ]]; then
+    complete -o nospace -C /usr/bin/terraform terraform
+  elif [[ "$OSTYPE" =~ "darwin" ]]; then
+    complete -o nospace -C /opt/homebrew/bin/terraform terraform
+  fi
+}
