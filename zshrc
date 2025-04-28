@@ -33,7 +33,7 @@ setopt APPEND_HISTORY         # append to history file
 setopt HIST_NO_STORE          # Don't store history commands
 
 # Aliases
-alias vi='vim'
+alias -g vi='vim'
 alias md='mkdir -p'
 alias rd='rmdir'
 
@@ -44,10 +44,10 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
 # List directory contents
-alias ls='ls --color=auto'
-alias l='ls -lhva'
-alias ll='ls -lhv'
-alias la='ls -lhvA'
+alias -g ls='ls --color=auto'
+alias -g l='ls -lhva'
+alias -g ll='ls -lhv'
+alias -g la='ls -lhvA'
 
 (( $+commands[kubectl] )) && alias k='kubectl'
 (( $+commands[kubectx] )) && alias kx='kubectx'
