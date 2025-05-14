@@ -2,6 +2,9 @@
 autoload -Uz compinit && compinit -i
 zstyle ':completion:*' menu select
 
+# Don't consider certain characters part of the word
+WORDCHARS=${WORDCHARS//\/[&.;]}
+
 # Use emacs key bindings
 bindkey -e
 
@@ -13,7 +16,6 @@ bindkey "^[[1;5D" backward-word
 bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 
-WORDCHARS=''
 PROMPT=' %(?.%F{10}❯.%F{9}❯)%f %F{11}%~%f '
 
 # History
@@ -31,11 +33,17 @@ setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks before recording entry
 setopt HIST_VERIFY            # Do not execute immediately upon history expansion
 setopt APPEND_HISTORY         # append to history file
 setopt HIST_NO_STORE          # Don't store history commands
+setopt CORRECT                # Auto correct mistakes
+setopt EXTENDED_GLOB          # Allows using regular expressions with *
+setopt NO_CASE_GLOB           # Case insensitive globbing
+setopt AUTOCD                 # If only directory path is entered, cd there
 
 # Aliases
 alias -g vi='vim'
 alias md='mkdir -p'
 alias rd='rmdir'
+alias df='df -hT'
+alias free='free -m'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -44,7 +52,7 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
 # List directory contents
-alias -g ls='ls --color=auto'
+alias ls='ls --color=auto'
 alias -g l='ls -lhva'
 alias -g ll='ls -lhv'
 alias -g la='ls -lhvA'
