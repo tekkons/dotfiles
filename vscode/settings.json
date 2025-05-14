@@ -27,5 +27,7 @@
     "files.enableTrash": false,
     "files.associations": {
         "*.tftpl": "terraform-vars"
-    }
+    },
+    "ansible.validation.lint.enabled": false,
+    "ansible.lightspeed.enabled": false
 }
