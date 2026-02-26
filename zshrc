@@ -3,7 +3,7 @@ autoload -Uz compinit && compinit -i
 zstyle ':completion:*' menu select
 
 # Don't consider certain characters part of the word
-WORDCHARS=${WORDCHARS//\/[&.;]}
+WORDCHARS="${WORDCHARS//\/[&.;]}"
 
 # Use emacs key bindings
 bindkey -e
@@ -52,7 +52,7 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 
 # List directory contents
-alias ls='ls --color=auto'
+alias ls='ls --color=always'
 alias -g l='ls -lhva'
 alias -g ll='ls -lhv'
 alias -g la='ls -lhvA'
@@ -79,8 +79,8 @@ export LC_CTYPE="$LANGUAGE"
 
 # KUBECONFIG
 (( $+commands[kubectl] )) && [[ -d ~/.kube ]] && {
-  for config in ~/.kube/config*; do
-    KUBECONFIG="$KUBECONFIG:$config"
+  for config in ~/.kube/conf*; do
+    KUBECONFIG="$config:$KUBECONFIG"
   done
   export KUBECONFIG
 }
