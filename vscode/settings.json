@@ -1,19 +1,17 @@
 {
-    "window.titleBarStyle": "native",
-    "window.customTitleBarVisibility": "never",
+    "window.customTitleBarVisibility": "windowed",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "GitHub Dark",
+    "workbench.colorTheme": "One Dark Pro Night Flat",
     "git.autofetch": true,
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
     "editor.fontSize": 14,
-    "editor.tabSize": 2,
     "editor.smoothScrolling": true,
     "editor.fontLigatures": true,
     "editor.cursorBlinking": "phase",
     "editor.mouseWheelZoom": true,
-    "explorer.confirmDelete": false,
+    "explorer.confirmDelete": true,
     "redhat.telemetry.enabled": false,
     "telemetry.telemetryLevel": "off",
     "terminal.integrated.fontSize": 14,
@@ -26,7 +24,12 @@
     "diffEditor.hideUnchangedRegions.enabled": true,
     "files.enableTrash": false,
     "files.associations": {
-        "*.tftpl": "terraform-vars"
+        "*.tftpl": "terraform-vars",
+        "**/inventory/**/*.yml": "ansible",
+        "**/playbooks/**/*.yml": "ansible",
+        "**/roles/**/*.yml": "ansible",
+        "**/variables/**/*.yml": "ansible",
+        "**/vars/**/*.yml": "ansible"
     },
     "ansible.validation.lint.enabled": false,
     "ansible.lightspeed.enabled": false
